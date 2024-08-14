@@ -1,9 +1,7 @@
 package com.marrrang.grpcexample.service
 
-import com.marrrang.grpc.lib.HelloReply
 import com.marrrang.grpc.lib.HelloRequest
 import com.marrrang.grpc.lib.MarrrangGrpc
-import io.grpc.stub.StreamObserver
 import net.devh.boot.grpc.client.inject.GrpcClient
 import org.springframework.stereotype.Service
 import java.util.concurrent.CompletableFuture
@@ -13,8 +11,8 @@ class GrpcClientService {
     @GrpcClient("marrrangGrpcClient")
     private lateinit var asyncStub: MarrrangGrpc.MarrrangFutureStub
 
-    fun sayHello(message: String): CompletableFuture<String> {
-        val request = HelloRequest.newBuilder().setName("Andrew").build()
+    fun sayHello(name: String): CompletableFuture<String> {
+        val request = HelloRequest.newBuilder().setName(name).build()
 
         val asyncResponse = asyncStub.sayHello(request)
 
